@@ -1,10 +1,9 @@
-package amz.findGcd;
+package amz;
 /*
  find gcd in nums array
  */
-public class Main {
+public class FindGCD {
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
         int[] nums = {221, 14443, 728, 72358};
         System.out.println(getGCD(nums));
     }

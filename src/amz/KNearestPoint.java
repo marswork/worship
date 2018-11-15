@@ -1,4 +1,4 @@
-package amz.kNearestPoint;
+package amz;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,7 +9,7 @@ import java.util.PriorityQueue;
 /*
  find k nearest point
  */
-public class Main {
+public class KNearestPoint {
     public static void main(String[] args) {
         List<List<Integer>> points = new ArrayList<>();
         points.add(Arrays.asList(3, 4));

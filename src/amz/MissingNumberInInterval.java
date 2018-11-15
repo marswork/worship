@@ -1,4 +1,4 @@
-package amz.MissingNumberInInterval;
+package amz;
 
 /*
 Missing Numbers in Interval
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Main {
+public class MissingNumberInInterval {
     public static void main(String[] args) {
         System.out.println(findMissing(new int[]{5,3,1,6,8}, new int[]{2,7}));
     }
