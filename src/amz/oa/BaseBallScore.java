@@ -27,10 +27,32 @@ X : sum = 3 + -2 * 2 = -1 (因为4被移除了，前一个成绩是-2)
 Note: 0 for any missing score
  */
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
+/*
+Johns play a game in which he throws a baseball at various blocks
+marked with a symbol so as to knock these out. A score is computed
+for each throw. The 'lastscore' is the score of the previous throw
+(or 0 if there is no previous throw) and the total score is the sum
+of the scores of all the throws. The symbol on a block can be an integer,
+a sign or a letter. Each sign or letter represents a special rule as
+given below.
+
+if a throw hits a block marked with an integer, the score for that
+throw is the value of that integer.
+if a throw hits a block marked with an 'X', the score for that throw
+is double the last score
+if a throw hits a block marked with an '+', the score for that throw
+is the sum of the last two scores.
+if a throw hits a block marked with an 'Z', the last score is removed,
+ as though the last throw never happened. Its value doesn't count towards
+ the total score, and the subsequent throws will ingnore it when computing
+ their values
+ */
 public class BaseBallScore {
     private Stack<Integer> scoreHistory = new Stack<>();
     private long totalScore = 0;
@@ -103,10 +125,43 @@ public class BaseBallScore {
         }
     }
 
+    public static class Solution {
+        public static int computeScore(String[] strs) {
+            int total = 0;
+            Deque<Integer> stk = new ArrayDeque<>();
+            for (String s : strs) {
+                if (s.equals("Z")) {
+                    if (!stk.isEmpty()) {
+                        total -= stk.pop();
+                    }
+                } else if (s.equals("X")) {
+                    int score = stk.peek() * 2;
+                    total += score;
+                    stk.push(score);
+                } else if (s.equals("+")) {
+                    Integer first = stk.isEmpty() ? null : stk.pop();
+                    Integer second = stk.isEmpty() ? null : stk.pop();
+                    int score = first + second;
+                    total += score;
+                    if (second != null) stk.push(second);
+                    if (first != null) stk.push(first);
+                    stk.push(score);
+                } else {
+                    int score = Integer.parseInt(s);
+                    stk.push(score);
+                    total += score;
+                }
+                System.out.println("s:" + s + " total:" + total);
+            }
+            return total;
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("Hello, Alexa!");
         String[] input = {"5", "-2", "4", "Z", "X", "9", "+", "+"};
-        BaseBallScore sol = new BaseBallScore();
-        System.out.printf("expected: 27, actual: %d\n", sol.computeScore(input));
+        //BaseBallScore sol = new BaseBallScore();
+        //System.out.printf("expected: 27, actual: %d\n", sol.computeScore(input));
+        System.out.printf("expected: 27, actual: %d\n", Solution.computeScore(input));
     }
 }
