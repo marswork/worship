@@ -21,7 +21,7 @@ import javafx.util.Pair;
  * 只要 times > 0 的 node 就代表有被搜尋過，這些會使用 Top K 算法 (min heap O(NlogK))
  *
  * 跟官方詳解比較起來：
- * 我優化的部分在於 input 時
+ * 優化的部分在於 input 時
  * 1. 用 TrieNode cur，就不用每次都重新再從開頭重新搜一遍
  * 2. 用 StringBuilder 不用建一堆 String
  *
@@ -34,6 +34,21 @@ import javafx.util.Pair;
  * 比較當前這個 node 所記錄的 top 跟回傳的 List 看看
  * 1. 有沒有人原本就在 top3 而 times 值需要更新
  * 2. 有沒有人原本沒在 top3，但打敗前面的人成為新的 top3
+ *
+ * 時間複雜度：
+ * 原本官方的解法是
+ * constructor: O(k * l) l sentences each of avg length k
+ * input: O(p + q + mlogm)
+ * p: length of sentence formed till now
+ * q: number of nodes in the trie considering the sentence formed till now (DFS)
+ * m: need to sort the list of length m sentences(假設 DFS 中有 m 個 sentences) to find top3
+ *
+ * my version:
+ * constructor: O(k * l)
+ * input: O(1 + q + mlog3)
+ * 1: 因為 sentence formed till now 是跟著 StringBuilder 跑的，不用再從頭走一遍
+ * q: same
+ * mlog3: 使用 top K 算法
  */
 
 public class AutocompleteSystem {
