@@ -6,9 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by wshung on 2018/12/19.
- */
 public class DesignInMemoryFileSystem {
     public static void main(String[] args) {
         DesignInMemoryFileSystem fs = new DesignInMemoryFileSystem();
@@ -110,56 +107,4 @@ public class DesignInMemoryFileSystem {
         Collections.sort(res);
         return res;
     }
-
-    /* public static class Dir {
-        public Map<String, Dir> dirs = new HashMap<>();
-        public Map<String, String> files = new HashMap<>();
-    }
-    public static class FileSystem {
-
-        public Dir root = new Dir();
-        public void mkdir(String path) {
-            String[] dirs = path.split("/");
-            Dir cur = root;
-            for (int i = 1; i < dirs.length; i++) {
-                cur.dirs.putIfAbsent(dirs[i], new Dir());
-                cur = cur.dirs.get(dirs[i]);
-            }
-        }
-        public String readContentFromFile(String filePath) {
-            String[] dirs = filePath.split("/");
-            Dir cur  = root;
-            for (int i = 1; i < dirs.length - 1; i++)
-                cur = cur.dirs.get(dirs[i]);
-            return cur.files.get(dirs[dirs.length-1]);
-        }
-
-        public void addContentToFile(String filePath, String content) {
-            String[] dirs = filePath.split("/");
-            Dir cur = root;
-            for (int i = 1; i < dirs.length - 1; i++)
-                cur = cur.dirs.get(dirs[i]);
-            cur.files.put(dirs[dirs.length-1], cur.files.getOrDefault(dirs[dirs.length-1], "") + content);
-        }
-
-        public List<String> ls(String path) {
-            List<String> res = new ArrayList<>();
-            Dir cur = root;
-            if (!path.equals("/")) {
-                String[] dirs = path.split("/");
-                for (int i = 1; i < dirs.length - 1; i++)
-                    cur = cur.dirs.get(dirs[i]);
-                if (cur.files.containsKey(dirs[dirs.length-1])) {
-                    res.add(dirs[dirs.length-1]);
-                    return res;
-                } else {
-                    cur = cur.dirs.get(dirs[dirs.length-1]);
-                }
-            }
-            res.addAll(cur.dirs.keySet());
-            res.addAll(cur.files.keySet());
-            Collections.sort(res);
-            return res;
-        }
-    }*/
 }
