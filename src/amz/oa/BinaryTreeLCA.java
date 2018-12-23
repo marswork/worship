@@ -1,3 +1,6 @@
+package amz.oa;
+
+import ds.tree.TreeNode;
 
 /**
  * Lowest Common Ancestor of a Binary Tree Given a binary tree, find the lowest
@@ -8,15 +11,6 @@
  * and w as descendants (where we allow a node to be a descendant of itself).”
  */
 public class BinaryTreeLCA {
-
-    public class TreeNode {
-        public TreeNode left = null;
-        public TreeNode right = null;
-        public int val;
-        public TreeNode (int val) {
-            this.val = val;
-        }
-    }
 
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if (root == null || root == p || root == q) return root;

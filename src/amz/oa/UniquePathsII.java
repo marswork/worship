@@ -1,3 +1,4 @@
+package amz.oa;
 
 public class UniquePathsII {
     public int uniquePathsWithObstacles(int[][] obstacleGrid) {

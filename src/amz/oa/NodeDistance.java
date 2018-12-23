@@ -1,3 +1,4 @@
+package amz.oa;
 
 /**
  * Given a list of unique integers, construct the binary search tree by given

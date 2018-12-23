@@ -1,3 +1,4 @@
+package amz.oa;
 /*
 
 打棒球得分，给了一个String[] input，求最终score

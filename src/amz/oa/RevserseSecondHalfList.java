@@ -1,4 +1,6 @@
 
+package amz.oa;
+
 public class RevserseSecondHalfList {
     static class ListNode {
         int val;
