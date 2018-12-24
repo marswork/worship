@@ -5,9 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by wshung on 2018/12/16.
- */
 public class DesignSnakeGame {
     public static final void main(String[] args) {
         List<int[]> foods = new ArrayList<>();
