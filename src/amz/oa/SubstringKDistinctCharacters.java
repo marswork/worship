@@ -7,8 +7,34 @@ import java.util.*;
  *
  * Given a string and number K, find the substrings of size K with K distinct characters. If no, output empty list.
  * Remember to remove the duplicate substrings, i.e. if the substring repeated twice, only output once.
+ *
+ * 注意這題，K <= 0 的話答案為 []
  */
 public class SubstringKDistinctCharacters {
+    public List<String> mySol(String s, int k) {
+        if (s == null || s.length() == 0 || k < 1)
+            return Collections.emptyList();
+        int cnt = 0; //distinct character count
+        int[] map = new int[256];
+        final int n = s.length();
+        Set<String> set = new HashSet<>();
+        List<String> res = new ArrayList<>();
+        for (int l = 0, r = 0; r < n; r++) {
+            char rc = s.charAt(r);
+            if (map[rc]++ == 0)
+                cnt++;
+            if (r - l + 1 == k) {
+                if (cnt == k) {
+                    String w = s.substring(l, r + 1);
+                    if (set.add(w))
+                        res.add(w);
+                }
+                if (--map[s.charAt(l++)] == 0)
+                    cnt--;
+            }
+        }
+        return res;
+    }
     public Collection<String> findSubstringKDistinct(String s, int k) {
         if (s == null || k < 1) {
             return Collections.emptyList();
@@ -16,7 +42,6 @@ public class SubstringKDistinctCharacters {
 
         return find(s, k);
     }
-
     private Set<String> find(String s, int k) {
         Set<String> result = new HashSet<>();
 
@@ -62,13 +87,20 @@ public class SubstringKDistinctCharacters {
     public static void main(String[] args) {
         SubstringKDistinctCharacters sol = new SubstringKDistinctCharacters();
         System.out.println(sol.findSubstringKDistinct("abccdef", 2));
+        System.out.println(sol.mySol("abccdef", 2));
         System.out.println(sol.findSubstringKDistinct("awaglknagawunagwkwagl", 4));
+        System.out.println(sol.mySol("awaglknagawunagwkwagl", 4));
         System.out.println(sol.findSubstringKDistinct("", 1));
+        System.out.println(sol.mySol("", 1));
         System.out.println(sol.findSubstringKDistinct("aaaaaaa", 2));
+        System.out.println(sol.mySol("aaaaaaa", 2));
         System.out.println(sol.findSubstringKDistinct("aaaaaaa", 1));
+        System.out.println(sol.mySol("aaaaaaa", 1));
         System.out.println(sol.findSubstringKDistinct(null, 1));
+        System.out.println(sol.mySol(null, 1));
         System.out.println(sol.findSubstringKDistinct(null, -1));
+        System.out.println(sol.mySol(null, -1));
         System.out.println(sol.findSubstringKDistinct("aaaabbb", 0));
-
+        System.out.println(sol.mySol("aaaabbb", 0));
     }
 }
